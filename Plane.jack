@@ -1,3 +1,51 @@
 class Plane {
-    
+    field int x, y; 
+    field boolean alive;
+
+    constructor Player new(int initialX, int initialY){
+        let x = initialX;
+        let y = initialY;
+    }
+
+    // Метод для перемещения самолета вверх
+    method void moveUp(int distance) {
+        let y = y - distance;
+    }
+
+    // Метод для перемещения самолета вниз
+    method void moveDown(int distance) {
+        let y = y + distance;
+    }
+
+    // Метод для получения текущего положения по оси X
+    method int getX() {
+        return x;
+    }
+
+    // Метод для получения текущего положения по оси Y
+    method int getY() {
+        return y;
+    }
+
+    // Метод для обработки столкновения с другим объектом
+    method boolean checkCollision(int objX, int objY, int objWidth, int objHeight) {
+        // Проверяем, пересекаются ли границы самолета с границами другого объекта
+        if (x < objX + objWidth && x + getWidth() > objX &&
+            y < objY + objHeight && y + getHeight() > objY) {
+            return true; // Столкновение произошло
+        }
+        return false; // Столкновение не произошло
+    }
+
+    // Метод для получения ширины самолета
+    method int getWidth() {
+        // В данном примере предполагается, что ширина самолета фиксирована
+        return 50; // Примерное значение ширины
+    }
+
+    // Метод для получения высоты самолета
+    method int getHeight() {
+        // В данном примере предполагается, что высота самолета фиксирована
+        return 30; // Примерное значение высоты
+    }
 }
