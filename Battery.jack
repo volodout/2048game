@@ -1,22 +1,22 @@
-class Fuel
+class Battery
 {
-    field int fuel;
+    field int battery;
     field int x, y, i;
 
-    constructor Fuel new(int Ax, int Ay)
+    constructor Battery new(int Ax, int Ay)
     {
         let x = Ax;
         let y = Ay;
-        let fuel = 20;
+        let battery = 40;
         do drawFull(Ax, Ay);
         return this;
     }
 
     method void addFuel(int volume)
     {
-        if (fuel + volume > 20)
+        if (battery + volume > 40)
         {
-            let fuel = 20;
+            let battery = 40;
             do drawFull(x, y);
         }
         else
@@ -29,9 +29,11 @@ class Fuel
     method void drawFull(int x, int y)
     {
         do Screen.setColor(true);
-        do Screen.drawRectangle(x, y, x + 21, y + 11);
-        do Screen.drawLine(x - 1, y + 1, x - 1, y + 9);
-        do Screen.drawLine(x + 22, y + 1, x + 22, y + 9);
+        do Screen.drawRectangle(x, y, x + 42, y + 22);
+        do Screen.drawLine(x - 1, y + 4, x - 1, y + 18);
+        do Screen.drawLine(x - 2, y + 4, x - 2, y + 18);
+        do Screen.drawLine(x + 43, y + 4, x + 43, y + 18);
+        do Screen.drawLine(x + 44, y + 4, x + 44, y + 18);
         do Screen.setColor(false);
         return;
     }
@@ -42,8 +44,8 @@ class Fuel
         do Screen.setColor(true);
         while (i < volume + 1)
         {
-            do Screen.drawLine(x + fuel + i, y + 1, x + fuel + i, y + 9);
-            let fuel = fuel + 1;
+            do Screen.drawLine(x + battery + i, y + 1, x + battery + i, y + 21);
+            let battery = battery + 1;
             let i = i + 1;
         }
         do Screen.setColor(false);
@@ -52,15 +54,18 @@ class Fuel
 
     method void erase()
     {
-        do Screen.setColor(false);
-        do Screen.drawLine(x + fuel, y + 1, x + fuel, y + 9);
-        let fuel = fuel - 1;
+        if (battery > 0)
+        {
+            do Screen.setColor(false);
+            do Screen.drawLine(x + battery, y + 1, x + battery, y + 21);
+            let battery = battery - 1;
+        }
         return;
     }
 
     method boolean IsEmpty()
     {
-        if (fuel = 0)
+        if (battery < 1)
         {
             return true;
         }

@@ -1,37 +1,58 @@
 class Game{
     field Plane plane;
-    field Fuel fuel;
+    field Battery battery;
+    field Sprites sprites;
     field boolean end;
 
     constructor Game new(){
-        let plane = Plane.new(128, 100);
-        let fuel = Fuel.new(2, 2);
+        let plane = Plane.new(70, 100);
+        
         return this;
     }
 
     method void start(){
         var int currentKey;
+        var int i;
         let end = false;
 		while(~end) {
+            do Output.moveCursor(10, 28);
+			do Output.printString("J E T");
+			do Output.moveCursor(12, 23);
+			do Output.printString("Press 'S' to Start!");
 			while(~(currentKey = 83) & ~(currentKey = 140)) {
 				let currentKey = Keyboard.keyPressed();
 			}
 			do Screen.clearScreen();
-
-			do plane.draw();
-            while(~(currentKey = 140)) {
+            let i = 0;
+			// do plane.draw();
+            do sprites.drawPlane(plane.getX(), plane.getY());
+            let battery = Battery.new(2, 2);
+            while(~(currentKey = 140) & ~(battery.IsEmpty())) {
 				let currentKey = Keyboard.keyPressed();
 				if (currentKey = 131) {
-					do plane.moveUp(5);
+                    // do plane.dispose();
+					// do plane.moveUp(5);
+                    // do plane.draw();
+                    do sprites.erasePlane(plane.getX(), plane.getY());
+					// do plane.dispose();
+					 do plane.moveUp(5);
+                    // do plane.draw();
+                    do sprites.drawPlane(plane.getX(), plane.getY());
 				}
 				if (currentKey = 133) {
-					do plane.moveDown(5);
+                    do sprites.erasePlane(plane.getX(), plane.getY());
+					// do plane.dispose();
+					 do plane.moveDown(5);
+                    // do plane.draw();
+                    do sprites.drawPlane(plane.getX(), plane.getY());
 				}
-                do Screen.clearScreen();
                 
-                do plane.draw();
-                do plane.draw();
                 do Sys.wait(100);
+                let i = i + 1;
+                if (i = 5){
+                    do battery.erase();
+                    let i = 0;
+                }
             }
         }
         return;

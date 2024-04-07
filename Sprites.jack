@@ -1,0 +1,104 @@
+class Sprites{ 
+    method void drawPlane(int x, int y) { 
+        var int location; 
+        var int memAddress;  
+        let location = getLocation(x, y); 
+        let memAddress = 16384 + location; 
+        // column 0 
+        do Memory.poke(memAddress, 227); 
+        do Memory.poke(memAddress +32, 293); 
+        do Memory.poke(memAddress +64, 585); 
+        do Memory.poke(memAddress +96, 16370); 
+        do Memory.poke(memAddress +128, -16383); 
+        do Memory.poke(memAddress +160, 10759); 
+        do Memory.poke(memAddress +192, 56); 
+        do Memory.poke(memAddress +224, -480); 
+        do Memory.poke(memAddress +256, 272); 
+        do Memory.poke(memAddress +288, 144); 
+        do Memory.poke(memAddress +320, 72); 
+        do Memory.poke(memAddress +352, 56); 
+        // column 1 
+        do Memory.poke(memAddress +161, 1); 
+        do Memory.poke(memAddress +193, 1); 
+        return; 
+    }
+
+    method void erasePlane(int x, int y){
+        var int location; 
+        var int memAddress;  
+        let location = getLocation(x, y); 
+        let memAddress = 16384 + location; 
+        // column 0 
+        do Memory.poke(memAddress, 0); 
+        do Memory.poke(memAddress +32, 0); 
+        do Memory.poke(memAddress +64, 0); 
+        do Memory.poke(memAddress +96, 0); 
+        do Memory.poke(memAddress +128, 0); 
+        do Memory.poke(memAddress +160, 0); 
+        do Memory.poke(memAddress +192, 0); 
+        do Memory.poke(memAddress +224, 0); 
+        do Memory.poke(memAddress +256, 0); 
+        do Memory.poke(memAddress +288, 0); 
+        do Memory.poke(memAddress +320, 0); 
+        do Memory.poke(memAddress +352, 0); 
+        // column 1 
+        do Memory.poke(memAddress +161, 0); 
+        do Memory.poke(memAddress +193, 0); 
+        return; 
+    }
+ 
+    method void drawFuel(int x, int y) { 
+        var int location; 
+        var int memAddress; 
+        let location = getLocation(x, y);  
+        let memAddress = 16384+location; 
+        // column 0 
+        do Memory.poke(memAddress +32, 32764); 
+        do Memory.poke(memAddress +64, -32766); 
+        do Memory.poke(memAddress +96, 16369); 
+        do Memory.poke(memAddress +128, 16393); 
+        do Memory.poke(memAddress +160, 16369); 
+        do Memory.poke(memAddress +192, 1); 
+        do Memory.poke(memAddress +224, 1); 
+        do Memory.poke(memAddress +256, -15); 
+        do Memory.poke(memAddress +288, 1); 
+        do Memory.poke(memAddress +320, 1); 
+        do Memory.poke(memAddress +352, 32753); 
+        do Memory.poke(memAddress +384, 1); 
+        do Memory.poke(memAddress +416, 1); 
+        do Memory.poke(memAddress +448, 8177); 
+        do Memory.poke(memAddress +480, 1); 
+        do Memory.poke(memAddress +512, 1); 
+        do Memory.poke(memAddress +544, 4081); 
+        do Memory.poke(memAddress +576, 1); 
+        do Memory.poke(memAddress +608, 1); 
+        do Memory.poke(memAddress +640, -2); 
+        // column 1 
+        do Memory.poke(memAddress +1, 96); 
+        do Memory.poke(memAddress +33, 144); 
+        do Memory.poke(memAddress +65, 105); 
+        do Memory.poke(memAddress +97, 38); 
+        do Memory.poke(memAddress +129, 16); 
+        do Memory.poke(memAddress +161, 16); 
+        do Memory.poke(memAddress +193, 16); 
+        do Memory.poke(memAddress +225, 16); 
+        do Memory.poke(memAddress +257, 17); 
+        do Memory.poke(memAddress +289, 16); 
+        do Memory.poke(memAddress +321, 16); 
+        do Memory.poke(memAddress +353, 16); 
+        do Memory.poke(memAddress +385, 16); 
+        do Memory.poke(memAddress +417, 16); 
+        do Memory.poke(memAddress +449, 16); 
+        do Memory.poke(memAddress +481, 16); 
+        do Memory.poke(memAddress +513, 16); 
+        do Memory.poke(memAddress +545, 16); 
+        do Memory.poke(memAddress +577, 16); 
+        do Memory.poke(memAddress +609, 16); 
+        do Memory.poke(memAddress +641, 15); 
+        return; 
+    } 
+ 
+    method int getLocation(int x, int y){ 
+        return y * 32 + x; 
+    } 
+}

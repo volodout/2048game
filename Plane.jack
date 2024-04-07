@@ -11,9 +11,9 @@ class Plane {
     // Метод для перемещения самолета вверх
     method void moveUp(int distance) {
         let y = y - distance;
-        if (y > 250)
+        if (y > 230)
         {
-            let y = 250;
+            let y = 230;
         }
         return;
     }
@@ -21,9 +21,9 @@ class Plane {
     // Метод для перемещения самолета вниз
     method void moveDown(int distance) {
         let y = y + distance;
-        if (y < 5)
+        if (y < 30)
         {
-            let y = 5;
+            let y = 30;
         }
         return;
     }
@@ -53,29 +53,41 @@ class Plane {
         return 30; // Примерное значение высоты
     }
 
-    method void draw(){ 
-        do Screen.setColor(true); 
-        do Screen.drawLine(x, y, x - 3, y - 3); 
-        do Screen.drawLine(x - 3, y - 3, x - 4, y - 3); 
-        do Screen.drawLine(x - 4, y - 3, x - 4, y - 1); 
-        do Screen.drawPixel(x - 3, y); 
-        do Screen.drawLine(x - 4, y + 1, x - 4, y + 2); 
-        do Screen.drawLine(x - 4, y + 2, x + 1, y + 3); 
-        do Screen.drawLine(x + 1, y + 3, x - 1, y + 8); 
-        do Screen.drawLine(x - 1, y + 8, x + 1, y + 8); 
-        do Screen.drawLine(x + 1, y + 8, x + 5, y + 4); 
-        do Screen.drawLine(x + 5, y + 4, x + 11, y + 4); 
-        do Screen.drawLine(x + 12, y + 3, x + 12, y + 2); 
-        do Screen.drawLine(x + 11, y + 1, x + 10, y + 1); 
-        do Screen.drawLine(x + 9, y, x, y); 
-        do Screen.drawLine(x + 6, y, x + 3, y - 3); 
-        do Screen.drawLine(x + 3, y - 3, x + 1, y - 3); 
-        do Screen.drawLine(x + 1, y - 3, x + 1, y - 2); 
-        do Screen.drawPixel(x + 2, y - 1); 
-        do Screen.drawPixel(x + 5, y + 2); 
-        do Screen.drawPixel(x + 7, y + 2); 
-        do Screen.drawPixel(x + 9, y + 2); 
-        do Screen.setColor(false); 
+    method void dispose(){
+        do Screen.setColor(false);
+        do drawPlane();
+        return;
+    }
+
+    method void draw(){
+        do Screen.setColor(true);
+        do drawPlane();
+        do Screen.setColor(false);
+        return;
+    }
+
+    method void drawPlane(){ 
+        do Screen.drawLine(x, y, x - 9, y - 9); 
+        do Screen.drawLine(x - 9, y - 9, x - 12, y - 9); 
+        do Screen.drawLine(x - 12, y - 9, x - 12, y - 3); 
+        do Screen.drawPixel(x - 9, y);
+        do Screen.drawLine(x - 12, y + 3, x - 12, y + 6); 
+        do Screen.drawLine(x - 12, y + 6, x + 3, y + 9); 
+
+        do Screen.drawLine(x + 3, y + 9, x - 3, y + 24); 
+        do Screen.drawLine(x - 3, y + 24, x + 3, y + 24); 
+        do Screen.drawLine(x + 3, y + 24, x + 15, y + 12); 
+        do Screen.drawLine(x + 15, y + 12, x + 33, y + 12); 
+        do Screen.drawLine(x + 36, y + 9, x + 36, y + 6); 
+        do Screen.drawLine(x + 33, y + 3, x + 30, y + 3); 
+        do Screen.drawLine(x + 27, y, x, y); 
+        do Screen.drawLine(x + 18, y, x + 9, y - 9); 
+        do Screen.drawLine(x + 9, y - 9, x + 3, y - 9); 
+        do Screen.drawLine(x + 3, y - 9, x + 3, y - 6); 
+        do Screen.drawPixel(x + 6, y - 3); 
+        do Screen.drawPixel(x + 15, y + 6); 
+        do Screen.drawPixel(x + 21, y + 6); 
+        do Screen.drawPixel(x + 27, y + 6); 
         return;
     }
 }
