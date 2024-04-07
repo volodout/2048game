@@ -273,7 +273,106 @@ class Sprites{
         do Memory.poke(memAddress +609, 0);  
         do Memory.poke(memAddress +641, 0);  
         return;  
-    }  
+    }
+
+    method void drawAirship(int x, int y)
+{   var int location;  
+        var int memAddress;  
+        let location = getLocation(x, y);   
+        let memAddress = 16384+location;  
+    do Memory.poke(memAddress, -4096);
+    do Memory.poke(memAddress +32, 3840);
+    do Memory.poke(memAddress +64, 2272);
+    do Memory.poke(memAddress +96, -968);
+    do Memory.poke(memAddress +128, 3068);
+    do Memory.poke(memAddress +160, 2111);
+    do Memory.poke(memAddress +192, 2300);
+    do Memory.poke(memAddress +224, 8124);
+    do Memory.poke(memAddress +256, -6088);
+    do Memory.poke(memAddress +288, 2096);
+    do Memory.poke(memAddress +320, 2240);
+    do Memory.poke(memAddress +352, 3840);
+    do Memory.poke(memAddress +384, -2048);
+    do Memory.poke(memAddress +416, 2048);
+    do Memory.poke(memAddress +448, -2048);
+    do Memory.poke(memAddress +480, -4096);
+    do Memory.poke(memAddress +33, 963);
+    do Memory.poke(memAddress +65, 31811);
+    do Memory.poke(memAddress +97, -32641);
+    do Memory.poke(memAddress +129, 8131);
+    do Memory.poke(memAddress +161, -8125);
+    do Memory.poke(memAddress +193, 32579);
+    do Memory.poke(memAddress +225, -32541);
+    do Memory.poke(memAddress +257, 24671);
+    do Memory.poke(memAddress +289, 6211);
+    do Memory.poke(memAddress +321, 1859);
+    do Memory.poke(memAddress +353, 227);
+    do Memory.poke(memAddress +385, 127);
+    do Memory.poke(memAddress +417, 96);
+    do Memory.poke(memAddress +449, 127);
+    do Memory.poke(memAddress +481, 63);
+    do Memory.poke(memAddress +34, 112);
+    do Memory.poke(memAddress +66, 56);
+    do Memory.poke(memAddress +98, 29);
+    do Memory.poke(memAddress +130, 15);
+    do Memory.poke(memAddress +162, 31);
+    do Memory.poke(memAddress +194, 15);
+    do Memory.poke(memAddress +226, 15); 
+    do Memory.poke(memAddress +258, 28);
+    do Memory.poke(memAddress +290, 56);
+    do Memory.poke(memAddress +322, 48);
+    return;
+}
+
+method void eraseAirship(int x, int y)
+ {
+    var int location;  
+        var int memAddress;  
+        let location = getLocation(x, y);   
+        let memAddress = 16384+location;  
+    do Memory.poke(memAddress, 0);
+    do Memory.poke(memAddress +32, 0);
+    do Memory.poke(memAddress +64, 0);
+    do Memory.poke(memAddress +96, 0);
+    do Memory.poke(memAddress +128, 0);
+    do Memory.poke(memAddress +160, 0);
+    do Memory.poke(memAddress +192, 0);
+    do Memory.poke(memAddress +224, 0);
+    do Memory.poke(memAddress +256, 0);
+    do Memory.poke(memAddress +288, 0);
+    do Memory.poke(memAddress +320, 0);
+    do Memory.poke(memAddress +352, 0);
+    do Memory.poke(memAddress +384, 0);
+    do Memory.poke(memAddress +416, 0);
+    do Memory.poke(memAddress +448, 0);
+    do Memory.poke(memAddress +480, 0);
+    do Memory.poke(memAddress +33, 0);
+    do Memory.poke(memAddress +65, 0);
+    do Memory.poke(memAddress +97, 0);
+    do Memory.poke(memAddress +129, 0);
+    do Memory.poke(memAddress +161, 0);
+    do Memory.poke(memAddress +193, 0);
+    do Memory.poke(memAddress +225, 0);
+    do Memory.poke(memAddress +257, 0);
+    do Memory.poke(memAddress +289, 0);
+    do Memory.poke(memAddress +321, 0);
+    do Memory.poke(memAddress +353, 0);
+    do Memory.poke(memAddress +385, 0);
+    do Memory.poke(memAddress +417, 0);
+    do Memory.poke(memAddress +449, 0);
+    do Memory.poke(memAddress +481, 0);
+    do Memory.poke(memAddress +34, 0);
+    do Memory.poke(memAddress +66, 0);
+    do Memory.poke(memAddress +98, 0);
+    do Memory.poke(memAddress +130, 0);
+    do Memory.poke(memAddress +162, 0);
+    do Memory.poke(memAddress +194, 0);
+    do Memory.poke(memAddress +226, 0); 
+    do Memory.poke(memAddress +258, 0);
+    do Memory.poke(memAddress +290, 0);
+    do Memory.poke(memAddress +322, 0);
+    return;
+}
   
     method int getLocation(int x, int y){  
         return y * 32 + x;

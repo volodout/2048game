@@ -1,23 +1,61 @@
 function Game.new 0
-push constant 5
+push constant 10
 call Memory.alloc 1
 pop pointer 0
 push constant 100
 push constant 200
 call Plane.new 2
 pop this 0
+push constant 97
+call Random.new 1
+pop this 7
 push pointer 0
 return
-function Game.start 3
+function Game.start 7
 push argument 0
 pop pointer 0
 push constant 0
-pop this 4
+pop this 8
+push constant 0
+pop this 9
 label WHILE_EXP0
-push this 4
+push this 8
 not
 not
 if-goto WHILE_END0
+push this 9
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 8
+push constant 26
+call Output.moveCursor 2
+pop temp 0
+push constant 10
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_FALSE0
 push constant 10
 push constant 28
 call Output.moveCursor 2
@@ -82,12 +120,6 @@ push constant 33
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Screen.drawPixel 2
-pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 83
@@ -121,10 +153,26 @@ push constant 2
 push constant 2
 call Battery.new 2
 pop this 1
-push constant 450
-push constant 150
+push constant 520
+push this 7
+call Random.get 1
 call Fuel.new 2
 pop this 3
+push constant 520
+push this 7
+call Random.get 1
+call Airship.new 2
+pop this 4
+push constant 520
+push this 7
+call Random.get 1
+call Airship.new 2
+pop this 5
+push constant 520
+push this 7
+call Random.get 1
+call Airship.new 2
+pop this 6
 label WHILE_EXP2
 push local 0
 push constant 140
@@ -134,9 +182,12 @@ push this 1
 call Battery.IsEmpty 1
 not
 and
+push this 9
+not
+and
 not
 if-goto WHILE_END2
-push constant 100
+push constant 75
 call Sys.wait 1
 pop temp 0
 push local 1
@@ -146,27 +197,27 @@ pop local 1
 push local 1
 push constant 5
 eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push this 1
 call Battery.erase 1
 pop temp 0
 push constant 0
 pop local 1
-label IF_FALSE0
+label IF_FALSE1
 push this 3
 call Fuel.getX 1
 push constant 1
 gt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push this 3
 call Fuel.erase 1
 pop temp 0
 push this 3
-push constant 5
+push constant 7
 call Fuel.moveLeft 2
 pop temp 0
 push this 3
@@ -184,26 +235,41 @@ call Fuel.getX 1
 and
 push this 0
 call Plane.getX 1
-lt
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push this 0
-call Plane.getY 1
-push this 3
-call Fuel.getY 1
-lt
-push this 3
-call Fuel.getY 1
-and
-push this 0
-call Plane.getY 1
-push constant 30
+push constant 20
 add
 lt
+pop local 3
+push this 0
+call Plane.getY 1
+push constant 15
+sub
+push this 3
+call Fuel.getY 1
+lt
+push this 3
+call Fuel.getY 1
+push this 0
+call Plane.getY 1
+push constant 35
+add
+lt
+and
+pop local 4
+push local 3
+push local 4
+and
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
+push this 3
+call Fuel.erase 1
+pop temp 0
+push this 3
+push constant 520
+push this 7
+call Random.get 1
+call Fuel.setCoords 3
+pop temp 0
 push this 1
 call Battery.addFuel 1
 pop temp 0
@@ -212,24 +278,31 @@ push constant 2
 push constant 2
 call Battery.drawFull 3
 pop temp 0
-push this 3
-call Fuel.dispose 1
-pop temp 0
-push constant 100
-push constant 500
-call Fuel.new 2
-pop this 3
 label IF_FALSE3
+goto IF_END2
 label IF_FALSE2
-goto IF_END1
-label IF_FALSE1
 push this 3
 call Fuel.erase 1
 pop temp 0
 push this 3
-call Fuel.dispose 1
+push constant 520
+push this 7
+call Random.get 1
+call Fuel.setCoords 3
 pop temp 0
-label IF_END1
+label IF_END2
+push pointer 0
+push this 4
+call Game.checkAir 2
+pop temp 0
+push pointer 0
+push this 5
+call Game.checkAir 2
+pop temp 0
+push pointer 0
+push this 6
+call Game.checkAir 2
+pop temp 0
 call Keyboard.keyPressed 0
 pop local 0
 push local 0
@@ -282,55 +355,105 @@ call Plane.getY 1
 call Sprites.drawPlane 3
 pop temp 0
 label IF_FALSE5
-push constant 20
-push constant 20
-call Output.moveCursor 2
-pop temp 0
-push this 0
-call Plane.getX 1
-call Output.printInt 1
-pop temp 0
-push constant 21
-push constant 20
-call Output.moveCursor 2
-pop temp 0
-push this 0
-call Plane.getY 1
-call Output.printInt 1
-pop temp 0
-push constant 20
-push constant 25
-call Output.moveCursor 2
-pop temp 0
-push this 3
-call Fuel.getX 1
-call Output.printInt 1
-pop temp 0
-push constant 21
-push constant 25
-call Output.moveCursor 2
-pop temp 0
-push this 3
-call Fuel.getY 1
-call Output.printInt 1
-pop temp 0
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Screen.drawPixel 2
+push constant 47
+push constant 0
+push constant 47
+push constant 255
+call Screen.drawLine 4
 pop temp 0
 push constant 0
 call Screen.setColor 1
+pop temp 0
+push constant 0
+push constant 25
+push constant 46
+push constant 255
+call Screen.drawRectangle 4
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2
 goto WHILE_EXP0
 label WHILE_END0
+push constant 0
+return
+function Game.checkAir 2
+push argument 0
+pop pointer 0
+push argument 1
+call Airship.getX 1
+push constant 10
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+call Airship.erase 1
+pop temp 0
+push argument 1
+push constant 5
+call Airship.moveLeft 2
+pop temp 0
+push argument 1
+call Airship.draw 1
+pop temp 0
+push this 0
+call Plane.getX 1
+push constant 60
+sub
+push argument 1
+call Airship.getX 1
+lt
+push argument 1
+call Airship.getX 1
+and
+push this 0
+call Plane.getX 1
+push constant 20
+add
+lt
+pop local 0
+push this 0
+call Plane.getY 1
+push constant 15
+sub
+push argument 1
+call Airship.getY 1
+lt
+push argument 1
+call Airship.getY 1
+push this 0
+call Plane.getY 1
+push constant 35
+add
+lt
+and
+pop local 1
+push local 0
+push local 1
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+pop this 9
+label IF_FALSE1
+goto IF_END0
+label IF_FALSE0
+push argument 1
+call Airship.erase 1
+pop temp 0
+push argument 1
+push constant 520
+push this 7
+call Random.get 1
+call Airship.setCoords 3
+pop temp 0
+label IF_END0
 push constant 0
 return
 function Game.dispose 0

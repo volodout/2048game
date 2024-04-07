@@ -1,16 +1,15 @@
-class Fuel
-{
+class Airship {
     field int x, y;
     field Sprites sprites;
-    constructor Fuel new(int initX, int initY)
-    {
-        let x = initX;
-        let y = initY;
+
+    constructor Airship new(int ax, int ay){
+        let x = ax;
+        let y = ay;
         return this;
     }
 
     method void draw(){
-        do sprites.drawFuel(x/16, y);
+        do sprites.drawAirship(x/16, y);
         return;
     }
 
@@ -20,7 +19,7 @@ class Fuel
     }
 
     method void erase(){
-        do sprites.eraseFuel(x/16, y);
+        do sprites.eraseAirship(x/16, y);
         return;
     }
 

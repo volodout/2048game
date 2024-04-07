@@ -1480,6 +1480,531 @@ call Memory.poke 2
 pop temp 0
 push constant 0
 return
+function Sprites.drawAirship 2
+push argument 0
+pop pointer 0
+push pointer 0
+push argument 1
+push argument 2
+call Sprites.getLocation 3
+pop local 0
+push constant 16384
+push local 0
+add
+pop local 1
+push local 1
+push constant 4096
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 32
+add
+push constant 3840
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 64
+add
+push constant 2272
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 96
+add
+push constant 968
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 128
+add
+push constant 3068
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 160
+add
+push constant 2111
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 192
+add
+push constant 2300
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 224
+add
+push constant 8124
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 256
+add
+push constant 6088
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 288
+add
+push constant 2096
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 320
+add
+push constant 2240
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 352
+add
+push constant 3840
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 384
+add
+push constant 2048
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 416
+add
+push constant 2048
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 448
+add
+push constant 2048
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 480
+add
+push constant 4096
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 33
+add
+push constant 963
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 65
+add
+push constant 31811
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 97
+add
+push constant 32641
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 129
+add
+push constant 8131
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 161
+add
+push constant 8125
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 193
+add
+push constant 32579
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 225
+add
+push constant 32541
+neg
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 257
+add
+push constant 24671
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 289
+add
+push constant 6211
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 321
+add
+push constant 1859
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 353
+add
+push constant 227
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 385
+add
+push constant 127
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 417
+add
+push constant 96
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 449
+add
+push constant 127
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 481
+add
+push constant 63
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 34
+add
+push constant 112
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 66
+add
+push constant 56
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 98
+add
+push constant 29
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 130
+add
+push constant 15
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 162
+add
+push constant 31
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 194
+add
+push constant 15
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 226
+add
+push constant 15
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 258
+add
+push constant 28
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 290
+add
+push constant 56
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 322
+add
+push constant 48
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Sprites.eraseAirship 2
+push argument 0
+pop pointer 0
+push pointer 0
+push argument 1
+push argument 2
+call Sprites.getLocation 3
+pop local 0
+push constant 16384
+push local 0
+add
+pop local 1
+push local 1
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 33
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 65
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 97
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 129
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 161
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 193
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 225
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 257
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 289
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 321
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 353
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 385
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 417
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 449
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 481
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 34
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 66
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 98
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 130
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 162
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 194
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 226
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 258
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 290
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 322
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
 function Sprites.getLocation 0
 push argument 0
 pop pointer 0

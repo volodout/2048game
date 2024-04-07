@@ -3,67 +3,96 @@ class Game{
     field Battery battery;
     field Sprites sprites;
     field Fuel fuel;
+    field Airship airship1;
+    field Airship airship2;
+    field Airship airship3;
+    // field Airship airship4;
+    // field Airship airship5;
+    // field Airship airship6;
+    // field Airship airship7;
+    
+    field Random random;
     field boolean end;
+    field boolean collide;
 
     constructor Game new(){
         let plane = Plane.new(100, 200);
-        
+        let random = Random.new(97);
         return this;
     }
 
     method void start(){
         var int currentKey;
         var int batteryCount;
-        var int fuelCount;
+        var int airshipCount;
+
+        var boolean inX;
+        var boolean inY;
+
+        var int i, j;
+        
+
         let end = false;
+        let collide = false;
 		while(~end) {
+            if (collide){
+                do Output.moveCursor(8, 26);
+                do Output.printString("Game Over!");
+            }
             do Output.moveCursor(10, 28);
 			do Output.printString("J E T");
 			do Output.moveCursor(12, 23);
 			do Output.printString("Press 'S' to Start!");
-            do Screen.drawPixel(plane.getX(), plane.getY());
 			while(~(currentKey = 83) & ~(currentKey = 140)) {
 				let currentKey = Keyboard.keyPressed();
 			}
 			do Screen.clearScreen();
             let batteryCount = 0;
-            let fuelCount = 0;
+            let airshipCount = 0;
             do sprites.drawPlane(plane.getX(), plane.getY());
             let battery = Battery.new(2, 2);
-            let fuel = Fuel.new(450, 150);
-            while(~(currentKey = 140) & ~(battery.IsEmpty())) {
-                do Sys.wait(100);
+            let fuel = Fuel.new(520, random.get());
 
+            let airship1 = Airship.new(520, random.get());
+            let airship2 = Airship.new(520, random.get());
+            let airship3 = Airship.new(520, random.get());
+
+            while(~(currentKey = 140) & ~(battery.IsEmpty()) & (~collide)) {
+                do Sys.wait(75);
                 let batteryCount = batteryCount + 1;
                 if (batteryCount = 5){
                     do battery.erase();
                     let batteryCount = 0;
                 }
 
-                // let fuelCount = fuelCount + 1;
-                // if (fuelCount = 40){
-                //     let fuel = Fuel.new(230, 500);
-                // }
-                // do fuel.draw();
                 if (fuel.getX() > 1) {
                     do fuel.erase();
-                    do fuel.moveLeft(5);
+                    do fuel.moveLeft(7);
                     do fuel.draw();
-                    if ((plane.getX()-60) < fuel.getX() & fuel.getX() < (plane.getX()+20))
-                    {
-                        if ((plane.getY()) < fuel.getY() & fuel.getY() < (plane.getY()+40))
+
+                    let inX = (plane.getX()-60) < fuel.getX() & fuel.getX() < (plane.getX()+20);
+                    let inY = ((plane.getY()-15) < fuel.getY()) & (fuel.getY() < (plane.getY()+35));
+
+                    if (inX & inY)
                         {
+                            do fuel.erase();
+                            do fuel.setCoords(520, random.get());
                             do battery.addFuel();
                             do battery.drawFull(2, 2);
-                            do fuel.dispose();
-                            let fuel = Fuel.new(100, 500);
                         }
                     }
-                }
                 else {
-                    do fuel.erase();
-                    do fuel.dispose();
-                }
+                        do fuel.erase();
+                        do fuel.setCoords(520, random.get());
+                    }
+
+                do checkAir(airship1);
+                do checkAir(airship2);
+                do checkAir(airship3);
+
+                
+                
+
 
                 let currentKey = Keyboard.keyPressed();
 				if (currentKey = 131) {
@@ -76,23 +105,51 @@ class Game{
 					do plane.moveDown(5);
                     do sprites.drawPlane(plane.getX(), plane.getY());
 				}
-                do Output.moveCursor(20, 20); // координаты самолета
-                do Output.printInt(plane.getX());
-                do Output.moveCursor(21, 20);
-                do Output.printInt(plane.getY());
-
-                do Output.moveCursor(20, 25); // координаты топлива
-                do Output.printInt(fuel.getX());
-                do Output.moveCursor(21, 25);
-                do Output.printInt(fuel.getY());
 
                 do Screen.setColor(true);
-                do Screen.drawPixel(plane.getX(), plane.getY());
+                do Screen.drawLine(47, 0, 47, 255);
                 do Screen.setColor(false);
+                do Screen.drawRectangle(0, 25, 46, 255);
+
+                // do Output.moveCursor(20, 20); // координаты самолета
+                // do Output.printInt(plane.getX());
+                // do Output.moveCursor(21, 20);
+                // do Output.printInt(plane.getY());
+
+                // do Output.moveCursor(20, 25); // координаты топлива
+                // do Output.printInt(fuel.getX());
+                // do Output.moveCursor(21, 25);
+                // do Output.printInt(fuel.getY());
             }
         }
+        
         return;
     }
+            
+        
+
+    method void checkAir(Airship airship){
+        var boolean inX, inY;
+        if (airship.getX() > 10) {
+            do airship.erase();
+            do airship.moveLeft(5);
+            do airship.draw();
+
+            let inX = (plane.getX()-60) < airship.getX() & airship.getX() < (plane.getX()+20);
+            let inY = ((plane.getY()-15) < airship.getY()) & (airship.getY() < (plane.getY()+35));
+
+            if (inX & inY)
+                {
+                    let collide = true;
+                }
+            }
+        else {
+                do airship.erase();
+                do airship.setCoords(520, random.get());
+        }
+        return;
+    }    
+    
 
     method void dispose(){
         return;
