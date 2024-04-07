@@ -1,0 +1,69 @@
+class Fuel
+{
+    field int fuel;
+    field int x, y;
+
+    constructor Fuel new(int Ax, int Ay)
+    {
+        let x = Ax;
+        let y = Ay;
+        let fuel = 20;
+        do drawFull(Ax, Ay);
+        return this;
+    }
+
+    method void addFuel(int volume)
+    {
+        if (fuel + volume > 20)
+        {
+            let fuel = 20;
+            do drawFull(x, y);
+        }
+        else
+        {
+            do draw(volume);
+        }
+        return;
+    }
+
+    method void drawFull(int x, int y)
+    {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x + 21, y + 11);
+        do Screen.drawLine(x - 1, y + 1, x - 1, y + 9);
+        do Screen.drawLine(x + 22, y + 1, x + 22, y + 9);
+        do Screen.setColor(false);
+        return;
+    }
+
+    method void draw(int volume)
+    {
+        let i = 1;
+        do Screen.setColor(true);
+        while (i < volume + 1)
+        {
+            do Screen.drawLine(x + fuel + i, y + 1, x + fuel + i, y + 9);
+            let fuel = fuel + 1;
+            let i = i + 1;
+        }
+        do Screen.setColor(false);
+        return;
+    }
+
+    method void erase()
+    {
+        do Screen.setColor(false);
+        do Screen.drawLine(x + fuel, y + 1, x + fuel, y + 9);
+        let fuel = fuel - 1;
+        return;
+    }
+
+    method boolean IsEmpty()
+    {
+        if (fuel == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+}
