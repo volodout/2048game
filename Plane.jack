@@ -2,19 +2,30 @@ class Plane {
     field int x, y; 
     field boolean alive;
 
-    constructor Player new(int initialX, int initialY){
+    constructor Plane new(int initialX, int initialY){
         let x = initialX;
         let y = initialY;
+        return this;
     }
 
     // Метод для перемещения самолета вверх
     method void moveUp(int distance) {
         let y = y - distance;
+        if (y > 250)
+        {
+            let y = 250;
+        }
+        return;
     }
 
     // Метод для перемещения самолета вниз
     method void moveDown(int distance) {
         let y = y + distance;
+        if (y < 5)
+        {
+            let y = 5;
+        }
+        return;
     }
 
     // Метод для получения текущего положения по оси X
@@ -29,15 +40,9 @@ class Plane {
 
     // Метод для обработки столкновения с другим объектом
     method boolean checkCollision(int objX, int objY, int objWidth, int objHeight) {
-        // Проверяем, пересекаются ли границы самолета с границами другого объекта
-        if (x < objX + objWidth && x + getWidth() > objX &&
-            y < objY + objHeight && y + getHeight() > objY) {
-            return true; // Столкновение произошло
-        }
-        return false; // Столкновение не произошло
+        return false;
     }
 
-    // Метод для получения ширины самолета
     method int getWidth() {
         // В данном примере предполагается, что ширина самолета фиксирована
         return 50; // Примерное значение ширины
@@ -45,7 +50,32 @@ class Plane {
 
     // Метод для получения высоты самолета
     method int getHeight() {
-        // В данном примере предполагается, что высота самолета фиксирована
         return 30; // Примерное значение высоты
+    }
+
+    method void draw(){ 
+        do Screen.setColor(true); 
+        do Screen.drawLine(x, y, x - 3, y - 3); 
+        do Screen.drawLine(x - 3, y - 3, x - 4, y - 3); 
+        do Screen.drawLine(x - 4, y - 3, x - 4, y - 1); 
+        do Screen.drawPixel(x - 3, y); 
+        do Screen.drawLine(x - 4, y + 1, x - 4, y + 2); 
+        do Screen.drawLine(x - 4, y + 2, x + 1, y + 3); 
+        do Screen.drawLine(x + 1, y + 3, x - 1, y + 8); 
+        do Screen.drawLine(x - 1, y + 8, x + 1, y + 8); 
+        do Screen.drawLine(x + 1, y + 8, x + 5, y + 4); 
+        do Screen.drawLine(x + 5, y + 4, x + 11, y + 4); 
+        do Screen.drawLine(x + 12, y + 3, x + 12, y + 2); 
+        do Screen.drawLine(x + 11, y + 1, x + 10, y + 1); 
+        do Screen.drawLine(x + 9, y, x, y); 
+        do Screen.drawLine(x + 6, y, x + 3, y - 3); 
+        do Screen.drawLine(x + 3, y - 3, x + 1, y - 3); 
+        do Screen.drawLine(x + 1, y - 3, x + 1, y - 2); 
+        do Screen.drawPixel(x + 2, y - 1); 
+        do Screen.drawPixel(x + 5, y + 2); 
+        do Screen.drawPixel(x + 7, y + 2); 
+        do Screen.drawPixel(x + 9, y + 2); 
+        do Screen.setColor(false); 
+        return;
     }
 }

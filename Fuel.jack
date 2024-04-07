@@ -1,7 +1,7 @@
 class Fuel
 {
     field int fuel;
-    field int x, y;
+    field int x, y, i;
 
     constructor Fuel new(int Ax, int Ay)
     {
@@ -60,7 +60,7 @@ class Fuel
 
     method boolean IsEmpty()
     {
-        if (fuel == 0)
+        if (fuel = 0)
         {
             return true;
         }

@@ -1,0 +1,43 @@
+class Game{
+    field Plane plane;
+    field Fuel fuel;
+    field boolean end;
+
+    constructor Game new(){
+        let plane = Plane.new(128, 100);
+        let fuel = Fuel.new(2, 2);
+        return this;
+    }
+
+    method void start(){
+        var int currentKey;
+        let end = false;
+		while(~end) {
+			while(~(currentKey = 83) & ~(currentKey = 140)) {
+				let currentKey = Keyboard.keyPressed();
+			}
+			do Screen.clearScreen();
+
+			do plane.draw();
+            while(~(currentKey = 140)) {
+				let currentKey = Keyboard.keyPressed();
+				if (currentKey = 131) {
+					do plane.moveUp(5);
+				}
+				if (currentKey = 133) {
+					do plane.moveDown(5);
+				}
+                do Screen.clearScreen();
+                
+                do plane.draw();
+                do plane.draw();
+                do Sys.wait(100);
+            }
+        }
+        return;
+    }
+
+    method void dispose(){
+        return;
+    }
+}
