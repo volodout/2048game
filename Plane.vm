@@ -16,12 +16,12 @@ push argument 1
 sub
 pop this 1
 push this 1
-push constant 230
-gt
+push constant 0
+lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push constant 230
+push constant 0
 pop this 1
 label IF_FALSE0
 push constant 0
@@ -34,12 +34,12 @@ push argument 1
 add
 pop this 1
 push this 1
-push constant 30
-lt
+push constant 220
+gt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push constant 30
+push constant 220
 pop this 1
 label IF_FALSE0
 push constant 0
@@ -53,11 +53,6 @@ function Plane.getY 0
 push argument 0
 pop pointer 0
 push this 1
-return
-function Plane.checkCollision 0
-push argument 0
-pop pointer 0
-push constant 0
 return
 function Plane.getWidth 0
 push argument 0

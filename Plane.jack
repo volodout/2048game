@@ -11,9 +11,10 @@ class Plane {
     // Метод для перемещения самолета вверх
     method void moveUp(int distance) {
         let y = y - distance;
-        if (y > 230)
+        
+        if (y < 0)
         {
-            let y = 230;
+            let y = 0;
         }
         return;
     }
@@ -21,9 +22,9 @@ class Plane {
     // Метод для перемещения самолета вниз
     method void moveDown(int distance) {
         let y = y + distance;
-        if (y < 30)
+        if (y > 220)
         {
-            let y = 30;
+            let y = 220;
         }
         return;
     }
@@ -36,11 +37,6 @@ class Plane {
     // Метод для получения текущего положения по оси Y
     method int getY() {
         return y;
-    }
-
-    // Метод для обработки столкновения с другим объектом
-    method boolean checkCollision(int objX, int objY, int objWidth, int objHeight) {
-        return false;
     }
 
     method int getWidth() {

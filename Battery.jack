@@ -12,17 +12,10 @@ class Battery
         return this;
     }
 
-    method void addFuel(int volume)
+    method void addFuel()
     {
-        if (battery + volume > 40)
-        {
-            let battery = 40;
-            do drawFull(x, y);
-        }
-        else
-        {
-            do draw(volume);
-        }
+        let battery = 40;
+        do drawFull(x, y);
         return;
     }
 

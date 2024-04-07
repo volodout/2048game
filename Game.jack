@@ -2,57 +2,93 @@ class Game{
     field Plane plane;
     field Battery battery;
     field Sprites sprites;
+    field Fuel fuel;
     field boolean end;
 
     constructor Game new(){
-        let plane = Plane.new(70, 100);
+        let plane = Plane.new(100, 200);
         
         return this;
     }
 
     method void start(){
         var int currentKey;
-        var int i;
+        var int batteryCount;
+        var int fuelCount;
         let end = false;
 		while(~end) {
             do Output.moveCursor(10, 28);
 			do Output.printString("J E T");
 			do Output.moveCursor(12, 23);
 			do Output.printString("Press 'S' to Start!");
+            do Screen.drawPixel(plane.getX(), plane.getY());
 			while(~(currentKey = 83) & ~(currentKey = 140)) {
 				let currentKey = Keyboard.keyPressed();
 			}
 			do Screen.clearScreen();
-            let i = 0;
-			// do plane.draw();
+            let batteryCount = 0;
+            let fuelCount = 0;
             do sprites.drawPlane(plane.getX(), plane.getY());
             let battery = Battery.new(2, 2);
+            let fuel = Fuel.new(450, 150);
             while(~(currentKey = 140) & ~(battery.IsEmpty())) {
-				let currentKey = Keyboard.keyPressed();
+                do Sys.wait(100);
+
+                let batteryCount = batteryCount + 1;
+                if (batteryCount = 5){
+                    do battery.erase();
+                    let batteryCount = 0;
+                }
+
+                // let fuelCount = fuelCount + 1;
+                // if (fuelCount = 40){
+                //     let fuel = Fuel.new(230, 500);
+                // }
+                // do fuel.draw();
+                if (fuel.getX() > 1) {
+                    do fuel.erase();
+                    do fuel.moveLeft(5);
+                    do fuel.draw();
+                    if ((plane.getX()-60) < fuel.getX() & fuel.getX() < (plane.getX()+20))
+                    {
+                        if ((plane.getY()) < fuel.getY() & fuel.getY() < (plane.getY()+40))
+                        {
+                            do battery.addFuel();
+                            do battery.drawFull(2, 2);
+                            do fuel.dispose();
+                            let fuel = Fuel.new(100, 500);
+                        }
+                    }
+                }
+                else {
+                    do fuel.erase();
+                    do fuel.dispose();
+                }
+
+                let currentKey = Keyboard.keyPressed();
 				if (currentKey = 131) {
-                    // do plane.dispose();
-					// do plane.moveUp(5);
-                    // do plane.draw();
                     do sprites.erasePlane(plane.getX(), plane.getY());
-					// do plane.dispose();
-					 do plane.moveUp(5);
-                    // do plane.draw();
+					do plane.moveUp(5);
                     do sprites.drawPlane(plane.getX(), plane.getY());
 				}
 				if (currentKey = 133) {
                     do sprites.erasePlane(plane.getX(), plane.getY());
-					// do plane.dispose();
-					 do plane.moveDown(5);
-                    // do plane.draw();
+					do plane.moveDown(5);
                     do sprites.drawPlane(plane.getX(), plane.getY());
 				}
-                
-                do Sys.wait(100);
-                let i = i + 1;
-                if (i = 5){
-                    do battery.erase();
-                    let i = 0;
-                }
+                do Output.moveCursor(20, 20); // координаты самолета
+                do Output.printInt(plane.getX());
+                do Output.moveCursor(21, 20);
+                do Output.printInt(plane.getY());
+
+                do Output.moveCursor(20, 25); // координаты топлива
+                do Output.printInt(fuel.getX());
+                do Output.moveCursor(21, 25);
+                do Output.printInt(fuel.getY());
+
+                do Screen.setColor(true);
+                do Screen.drawPixel(plane.getX(), plane.getY());
+                do Screen.setColor(false);
             }
         }
         return;
