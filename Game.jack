@@ -1,41 +1,44 @@
 class Game{
     field Plane plane;
     field Battery battery;
-    field Sprites sprites;
     field Fuel fuel;
+    field Sprites sprites;
+    
     field Airship airship1;
     field Airship airship2;
     field Airship airship3;
-    // field Airship airship4;
+    field Airship airship4;
     // field Airship airship5;
     // field Airship airship6;
     // field Airship airship7;
     
     field Random random;
-    field boolean end;
-    field boolean collide;
 
-    constructor Game new(){
+    field int score;
+
+    field boolean end;
+    field boolean conflict;
+
+    constructor Game new()
+    {
         let plane = Plane.new(100, 200);
-        let random = Random.new(97);
+        // let random = Random.new(11);
         return this;
     }
 
-    method void start(){
+    method void start()
+    {
         var int currentKey;
         var int batteryCount;
-        var int airshipCount;
-
-        var boolean inX;
-        var boolean inY;
 
         var int i, j;
-        
 
         let end = false;
-        let collide = false;
-		while(~end) {
-            if (collide){
+        let conflict = false;
+		while(~end)
+        {
+            if (conflict)
+            {
                 do Output.moveCursor(8, 26);
                 do Output.printString("Game Over!");
             }
@@ -43,73 +46,48 @@ class Game{
 			do Output.printString("J E T");
 			do Output.moveCursor(12, 23);
 			do Output.printString("Press 'S' to Start!");
-			while(~(currentKey = 83) & ~(currentKey = 140)) {
+			while(~(currentKey = 83) & ~(currentKey = 140))
+            {
 				let currentKey = Keyboard.keyPressed();
 			}
 			do Screen.clearScreen();
+
+
             let batteryCount = 0;
-            let airshipCount = 0;
+
             do sprites.drawPlane(plane.getX(), plane.getY());
             let battery = Battery.new(2, 2);
-            let fuel = Fuel.new(520, random.get());
+            let fuel = Fuel.new(520, 200);
 
-            let airship1 = Airship.new(520, random.get());
-            let airship2 = Airship.new(520, random.get());
-            let airship3 = Airship.new(520, random.get());
+            let airship1 = Airship.new(520, 100);
+            let airship2 = Airship.new(370, 120);
+            let airship3 = Airship.new(220, 140);
+            // let airship4 = Airship.new(220, random.get());
 
-            while(~(currentKey = 140) & ~(battery.IsEmpty()) & (~collide)) {
+            while(~(currentKey = 140) & ~(battery.IsEmpty()) & (~conflict))
+            {
                 do Sys.wait(75);
-                let batteryCount = batteryCount + 1;
-                if (batteryCount = 5){
+
+                let batteryCount = batteryCount + 1;  // уменьшение батареи
+                if (batteryCount = 5)
+                {
                     do battery.erase();
                     let batteryCount = 0;
                 }
 
-                if (fuel.getX() > 1) {
-                    do fuel.erase();
-                    do fuel.moveLeft(7);
-                    do fuel.draw();
+                do checkFuel(fuel); // проверка на подбор топлива
 
-                    let inX = (plane.getX()-60) < fuel.getX() & fuel.getX() < (plane.getX()+20);
-                    let inY = ((plane.getY()-15) < fuel.getY()) & (fuel.getY() < (plane.getY()+35));
-
-                    if (inX & inY)
-                        {
-                            do fuel.erase();
-                            do fuel.setCoords(520, random.get());
-                            do battery.addFuel();
-                            do battery.drawFull(2, 2);
-                        }
-                    }
-                else {
-                        do fuel.erase();
-                        do fuel.setCoords(520, random.get());
-                    }
-
-                do checkAir(airship1);
+                do checkAir(airship1); // проверка на столкновение с дирижаблем
                 do checkAir(airship2);
                 do checkAir(airship3);
-
-                
-                
+                // do checkAir(airship4);
 
 
                 let currentKey = Keyboard.keyPressed();
-				if (currentKey = 131) {
-                    do sprites.erasePlane(plane.getX(), plane.getY());
-					do plane.moveUp(5);
-                    do sprites.drawPlane(plane.getX(), plane.getY());
-				}
-				if (currentKey = 133) {
-                    do sprites.erasePlane(plane.getX(), plane.getY());
-					do plane.moveDown(5);
-                    do sprites.drawPlane(plane.getX(), plane.getY());
-				}
+				do checkCurrentKey(currentKey);  // проверка нажатой клавиши
 
-                do Screen.setColor(true);
-                do Screen.drawLine(47, 0, 47, 255);
-                do Screen.setColor(false);
-                do Screen.drawRectangle(0, 25, 46, 255);
+                
+                do drawScoreField();
 
                 // do Output.moveCursor(20, 20); // координаты самолета
                 // do Output.printInt(plane.getX());
@@ -125,30 +103,100 @@ class Game{
         
         return;
     }
+
+    method void checkFuel(Fuel fuel)
+    {
+        var boolean inX, inY;
+        if (fuel.getX() > 1)
+        {
+            do fuel.erase();
+            do fuel.moveLeft(7);
+            do fuel.draw();
+
+            do drawScoreField();
+
+            let inX = (plane.getX()-60) < fuel.getX() & fuel.getX() < (plane.getX()+20);
+            let inY = ((plane.getY()-15) < fuel.getY()) & (fuel.getY() < (plane.getY()+35));
+
+            if (inX & inY)
+            {
+                do fuel.erase();
+                do fuel.setCoords(520, 200);
+                do battery.addFuel();
+                do battery.drawFull(2, 2);
+
+                let score = score + 1;
+            }
+        }
+        else
+        {
+            do fuel.erase();
+            do fuel.setCoords(520, 200);
+        }
+        return;
+    }
             
         
 
-    method void checkAir(Airship airship){
+    method void checkAir(Airship airship)
+    {
         var boolean inX, inY;
-        if (airship.getX() > 10) {
+        if (airship.getX() > 10)
+        {
             do airship.erase();
             do airship.moveLeft(5);
             do airship.draw();
 
-            let inX = (plane.getX()-60) < airship.getX() & airship.getX() < (plane.getX()+20);
-            let inY = ((plane.getY()-15) < airship.getY()) & (airship.getY() < (plane.getY()+35));
+            do drawScoreField();
+
+            let inX = (plane.getX()-55) < airship.getX() & airship.getX() < (plane.getX()+20);
+            let inY = ((plane.getY()) < airship.getY()) & (airship.getY() < (plane.getY()+35));
 
             if (inX & inY)
                 {
-                    let collide = true;
+                    let conflict = true;
                 }
-            }
-        else {
-                do airship.erase();
-                do airship.setCoords(520, random.get());
+        }
+        else
+        {
+            do airship.erase();
+            do airship.setCoords(520, 120);
         }
         return;
-    }    
+    }
+
+    method void checkCurrentKey(int currentKey)
+    {
+        if (currentKey = 131)
+        {
+            do sprites.erasePlane(plane.getX(), plane.getY());
+            do plane.moveUp(5);
+            do sprites.drawPlane(plane.getX(), plane.getY());
+        }
+        if (currentKey = 133)
+        {
+            do sprites.erasePlane(plane.getX(), plane.getY());
+            do plane.moveDown(5);
+            do sprites.drawPlane(plane.getX(), plane.getY());
+        }
+        return;
+    }
+
+    method void drawScoreField()
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0, 25, 46, 255);
+
+        do Output.moveCursor(3, 0);
+        do Output.printString("SCORE:");
+        do Output.moveCursor(4, 2);
+        do Output.printInt(score);
+
+        do Screen.setColor(true);
+        do Screen.drawLine(47, 0, 47, 255);
+
+        return;
+    }
     
 
     method void dispose(){

@@ -2,14 +2,15 @@ class Plane {
     field int x, y; 
     field boolean alive;
 
-    constructor Plane new(int initialX, int initialY){
+    constructor Plane new(int initialX, int initialY)
+    {
         let x = initialX;
         let y = initialY;
         return this;
     }
 
-    // Метод для перемещения самолета вверх
-    method void moveUp(int distance) {
+    method void moveUp(int distance)
+    {
         let y = y - distance;
         
         if (y < 0)
@@ -19,8 +20,8 @@ class Plane {
         return;
     }
 
-    // Метод для перемещения самолета вниз
-    method void moveDown(int distance) {
+    method void moveDown(int distance)
+    {
         let y = y + distance;
         if (y > 220)
         {
@@ -29,61 +30,13 @@ class Plane {
         return;
     }
 
-    // Метод для получения текущего положения по оси X
-    method int getX() {
+    method int getX()
+    {
         return x;
     }
 
-    // Метод для получения текущего положения по оси Y
-    method int getY() {
+    method int getY()
+    {
         return y;
-    }
-
-    method int getWidth() {
-        // В данном примере предполагается, что ширина самолета фиксирована
-        return 50; // Примерное значение ширины
-    }
-
-    // Метод для получения высоты самолета
-    method int getHeight() {
-        return 30; // Примерное значение высоты
-    }
-
-    method void dispose(){
-        do Screen.setColor(false);
-        do drawPlane();
-        return;
-    }
-
-    method void draw(){
-        do Screen.setColor(true);
-        do drawPlane();
-        do Screen.setColor(false);
-        return;
-    }
-
-    method void drawPlane(){ 
-        do Screen.drawLine(x, y, x - 9, y - 9); 
-        do Screen.drawLine(x - 9, y - 9, x - 12, y - 9); 
-        do Screen.drawLine(x - 12, y - 9, x - 12, y - 3); 
-        do Screen.drawPixel(x - 9, y);
-        do Screen.drawLine(x - 12, y + 3, x - 12, y + 6); 
-        do Screen.drawLine(x - 12, y + 6, x + 3, y + 9); 
-
-        do Screen.drawLine(x + 3, y + 9, x - 3, y + 24); 
-        do Screen.drawLine(x - 3, y + 24, x + 3, y + 24); 
-        do Screen.drawLine(x + 3, y + 24, x + 15, y + 12); 
-        do Screen.drawLine(x + 15, y + 12, x + 33, y + 12); 
-        do Screen.drawLine(x + 36, y + 9, x + 36, y + 6); 
-        do Screen.drawLine(x + 33, y + 3, x + 30, y + 3); 
-        do Screen.drawLine(x + 27, y, x, y); 
-        do Screen.drawLine(x + 18, y, x + 9, y - 9); 
-        do Screen.drawLine(x + 9, y - 9, x + 3, y - 9); 
-        do Screen.drawLine(x + 3, y - 9, x + 3, y - 6); 
-        do Screen.drawPixel(x + 6, y - 3); 
-        do Screen.drawPixel(x + 15, y + 6); 
-        do Screen.drawPixel(x + 21, y + 6); 
-        do Screen.drawPixel(x + 27, y + 6); 
-        return;
     }
 }

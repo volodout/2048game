@@ -2,6 +2,7 @@ class Fuel
 {
     field int x, y;
     field Sprites sprites;
+
     constructor Fuel new(int initX, int initY)
     {
         let x = initX;
@@ -9,37 +10,38 @@ class Fuel
         return this;
     }
 
-    method void draw(){
+    method void draw()
+    {
         do sprites.drawFuel(x/16, y);
         return;
     }
 
-    method void moveLeft(int distance){
+    method void moveLeft(int distance)
+    {
         let x = x - distance;
         return;
     }
 
-    method void erase(){
+    method void erase()
+    {
         do sprites.eraseFuel(x/16, y);
         return;
     }
 
-    method int getX(){
+    method int getX()
+    {
         return x;
     }
 
-    method int getY(){
+    method int getY()
+    {
         return y;
     }
 
-    method void setCoords(int newX, int newY){
+    method void setCoords(int newX, int newY)
+    {
         let x = newX;
         let y = newY;
-        return;
-    }
-
-    method void dispose(){
-        do Memory.deAlloc(this);
         return;
     }
 }
