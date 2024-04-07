@@ -6,15 +6,16 @@ push constant 100
 push constant 200
 call Plane.new 2
 pop this 0
+push constant 31
+call Random.new 1
+pop this 8
 push pointer 0
 return
-function Game.start 4
+function Game.start 5
 push argument 0
 pop pointer 0
 push constant 0
 pop this 10
-push constant 0
-pop this 11
 label WHILE_EXP0
 push this 10
 not
@@ -122,11 +123,6 @@ push local 0
 push constant 83
 eq
 not
-push local 0
-push constant 140
-eq
-not
-and
 not
 if-goto WHILE_END1
 call Keyboard.keyPressed 0
@@ -136,7 +132,42 @@ label WHILE_END1
 call Screen.clearScreen 0
 pop temp 0
 push constant 0
+pop this 11
+push constant 0
+pop this 9
+push constant 0
 pop local 1
+push constant 0
+pop local 2
+push constant 2
+push constant 2
+call Battery.new 2
+pop this 1
+push constant 520
+push this 8
+call Random.get 1
+call Fuel.new 2
+pop this 2
+push constant 520
+push this 8
+call Random.get 1
+call Airship.new 2
+pop this 4
+push constant 410
+push this 8
+call Random.get 1
+call Airship.new 2
+pop this 5
+push constant 300
+push this 8
+call Random.get 1
+call Airship.new 2
+pop this 6
+push constant 190
+push this 8
+call Random.get 1
+call Airship.new 2
+pop this 7
 push this 3
 push this 0
 call Plane.getX 1
@@ -144,35 +175,10 @@ push this 0
 call Plane.getY 1
 call Sprites.drawPlane 3
 pop temp 0
-push constant 2
-push constant 2
-call Battery.new 2
-pop this 1
-push constant 520
-push constant 200
-call Fuel.new 2
-pop this 2
-push constant 520
-push constant 100
-call Airship.new 2
-pop this 4
-push constant 370
-push constant 120
-call Airship.new 2
-pop this 5
-push constant 220
-push constant 140
-call Airship.new 2
-pop this 6
 label WHILE_EXP2
-push local 0
-push constant 140
-eq
-not
 push this 1
 call Battery.IsEmpty 1
 not
-and
 push this 11
 not
 and
@@ -213,15 +219,65 @@ push pointer 0
 push this 6
 call Game.checkAir 2
 pop temp 0
-call Keyboard.keyPressed 0
-pop local 0
 push pointer 0
-push local 0
-call Game.checkCurrentKey 2
+push this 7
+call Game.checkAir 2
 pop temp 0
 push pointer 0
 call Game.drawScoreField 1
 pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 3
+push this 0
+call Plane.getX 1
+push this 0
+call Plane.getY 1
+call Sprites.erasePlane 3
+pop temp 0
+push this 0
+push constant 5
+call Plane.moveUp 2
+pop temp 0
+push this 3
+push this 0
+call Plane.getX 1
+push this 0
+call Plane.getY 1
+call Sprites.drawPlane 3
+pop temp 0
+label IF_FALSE2
+push local 0
+push constant 133
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 3
+push this 0
+call Plane.getX 1
+push this 0
+call Plane.getY 1
+call Sprites.erasePlane 3
+pop temp 0
+push this 0
+push constant 5
+call Plane.moveDown 2
+pop temp 0
+push this 3
+push this 0
+call Plane.getX 1
+push this 0
+call Plane.getY 1
+call Sprites.drawPlane 3
+pop temp 0
+label IF_FALSE3
 goto WHILE_EXP2
 label WHILE_END2
 goto WHILE_EXP0
@@ -247,9 +303,6 @@ call Fuel.moveLeft 2
 pop temp 0
 push argument 1
 call Fuel.draw 1
-pop temp 0
-push pointer 0
-call Game.drawScoreField 1
 pop temp 0
 push this 0
 call Plane.getX 1
@@ -294,7 +347,8 @@ call Fuel.erase 1
 pop temp 0
 push argument 1
 push constant 520
-push constant 200
+push this 8
+call Random.get 1
 call Fuel.setCoords 3
 pop temp 0
 push this 1
@@ -317,7 +371,8 @@ call Fuel.erase 1
 pop temp 0
 push argument 1
 push constant 520
-push constant 200
+push this 8
+call Random.get 1
 call Fuel.setCoords 3
 pop temp 0
 label IF_END0
@@ -343,12 +398,9 @@ pop temp 0
 push argument 1
 call Airship.draw 1
 pop temp 0
-push pointer 0
-call Game.drawScoreField 1
-pop temp 0
 push this 0
 call Plane.getX 1
-push constant 55
+push constant 15
 sub
 push argument 1
 call Airship.getX 1
@@ -364,6 +416,8 @@ lt
 pop local 0
 push this 0
 call Plane.getY 1
+push constant 15
+sub
 push argument 1
 call Airship.getY 1
 lt
@@ -393,65 +447,11 @@ call Airship.erase 1
 pop temp 0
 push argument 1
 push constant 520
-push constant 120
+push this 8
+call Random.get 1
 call Airship.setCoords 3
 pop temp 0
 label IF_END0
-push constant 0
-return
-function Game.checkCurrentKey 0
-push argument 0
-pop pointer 0
-push argument 1
-push constant 131
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 3
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Sprites.erasePlane 3
-pop temp 0
-push this 0
-push constant 5
-call Plane.moveUp 2
-pop temp 0
-push this 3
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Sprites.drawPlane 3
-pop temp 0
-label IF_FALSE0
-push argument 1
-push constant 133
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push this 3
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Sprites.erasePlane 3
-pop temp 0
-push this 0
-push constant 5
-call Plane.moveDown 2
-pop temp 0
-push this 3
-push this 0
-call Plane.getX 1
-push this 0
-call Plane.getY 1
-call Sprites.drawPlane 3
-pop temp 0
-label IF_FALSE1
 push constant 0
 return
 function Game.drawScoreField 0
@@ -502,6 +502,9 @@ push constant 0
 push constant 47
 push constant 255
 call Screen.drawLine 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
 pop temp 0
 push constant 0
 return
